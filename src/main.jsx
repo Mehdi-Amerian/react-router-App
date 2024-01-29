@@ -15,10 +15,13 @@ import Contact from "./routes/contact";
       element: <Root/>,
       errorElement: <ErrorPage/>,
     },
-    {
-      path:"contacts/:contactId",
-      element: <Contact />,
-    },
+    children[
+      {
+        path:"contacts/:contactId",
+        element: <Contact />,
+      },
+    ],
+    
   ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
