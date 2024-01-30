@@ -1,4 +1,4 @@
-import localforage from "localforage";
+import localforage from "localfoage";
 import { matchSorter } from "match-sorter";
 import sortBy from "sort-by";
 
