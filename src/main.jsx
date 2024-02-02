@@ -24,6 +24,16 @@ import Index from "./routes/index";
       loader: rootLoader,
       action: rootAction,
       children: [
+        {
+          errorElement: <ErrorPage />,
+          children: [
+            { index: true, element: <Index /> },
+            {
+              path: "contacts/:contactId",
+              element: <Contact />,
+              loader: contactLoader,
+              action: contactAction,
+            },
         { index: true, element: <Index /> },
         {
           path:"contacts/:contactId",
@@ -44,6 +54,8 @@ import Index from "./routes/index";
         },
       ],
     },
+  ],
+},
   ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
