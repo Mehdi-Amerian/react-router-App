@@ -48,6 +48,7 @@ export default function Root() {
                   submit(event.currentTarget.form, {
                     replace: !isFirstSearch,
                   });
+                }}
               />
               <div
                 id="search-spinner"
