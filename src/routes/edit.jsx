@@ -6,14 +6,8 @@ export async function action({ request, params }) {
     // Extracting form data from the request
     const formData = await request.formData();
 
-    // Extracting individual form fields like first name, last name, etc.
-    const firstName = formData.get("first");
-    const lastName = formData.get("last");
-
     // Converting form data into an object containing updates for the contact
     const updates = Object.fromEntries(formData);
-    updates.first;
-    updates.last;
 
     // Asynchronously updating the contact using the 'updateContact' function
     await updateContact(params.contactId, updates);
