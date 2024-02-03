@@ -18,6 +18,13 @@ import EditContact, { action as editAction, } from "./routes/edit";
 import { action as destroyAction } from "./routes/destroy";
 import Index from "./routes/index";
 
+// Creating a browser router instance for handling client side routing
+//'CreateRoutesFromElements' creates routes using JSX elements, which allows to define the route hierarchy
+//'Route' represents a route with attributes like path, element, loader, action, and errorElement
+//Root, Contact, EditContact, Index: Represent components for different routes
+//loader and action: Functions associated with loading and handling actions for specific routes
+//errorElement: The component to render in case of an error.
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route
@@ -49,6 +56,12 @@ const router = createBrowserRouter(
     </Route>
   )
 );
+
+//ReactDOM.createRoot: Creates a root for React rendering
+//<React.StrictMode>: Wraps the RouterProvider in StrictMode to enable additional runtime checks and warnings
+//RouterProvider: Provides the router context to the app
+//router={router}: Associates the created router instance with the RouterProvider
+//ReactDOM.createRoot(...).render(...): Renders the app inside the specified root element
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>

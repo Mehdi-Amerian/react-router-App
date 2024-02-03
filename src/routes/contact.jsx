@@ -1,27 +1,40 @@
 import { Form, useLoaderData, useFetcher } from "react-router-dom";
 import { getContact, updateContact } from "../contacts";
 
+// Asynchronous function named 'action' that handles the update of a contact's favorite status
 export async function action({ request, params }) {
+    // Extracting form data from the request
     let formData = await request.formData();
+  
+    // Updating the contact's favorite status based on the submitted form data
     return updateContact(params.contactId, {
       favorite: formData.get("favorite") === "true",
     });
   }
-
-export async function loader({ params }) {
+  
+  // Asynchronous function named 'loader' that retrieves contact data based on the provided contactId
+  export async function loader({ params }) {
+    // Retrieving the contact data using the 'getContact' function
     const contact = await getContact(params.contactId);
+  
+    // If no contact is found, throw a 404 Not Found response
     if (!contact) {
-        throw new Response("", {
-            status: 404,
-            statusText: "Not Found",
-
-        });
+      throw new Response("", {
+        status: 404,
+        statusText: "Not Found",
+      });
     }
+  
+    // Returning the contact data
     return { contact };
-}
-
-export default function Contact() {
+  }
+  
+  // React functional component named 'Contact'
+  export default function Contact() {
+    // Extracting 'contact' from the data loaded by the route
     const { contact } = useLoaderData();
+  
+    // JSX for displaying contact information and options
   return (
     <div id="contact">
       <div>
@@ -81,12 +94,20 @@ export default function Contact() {
   );
 }
 
+// React functional component named 'Favorite' for managing favorite status
 function Favorite({ contact }) {
-  const fetcher = useFetcher();
-  let favorite = contact.favorite;
-  if (fetcher.formData) {
-    favorite = fetcher.formData.get("favorite") === "true";
-  }
+    // Accessing the 'fetcher' and 'useFetcher' from 'react-router-dom'
+    const fetcher = useFetcher();
+  
+    // Retrieving the favorite status from the contact data
+    let favorite = contact.favorite;
+  
+    // Checking if the 'fetcher' has form data and updating 'favorite' accordingly
+    if (fetcher.formData) {
+      favorite = fetcher.formData.get("favorite") === "true";
+    }
+  
+    // JSX for displaying and toggling favorite status
   return (
     <fetcher.Form method="post">
       <button

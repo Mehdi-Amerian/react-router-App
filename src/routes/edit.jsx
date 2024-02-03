@@ -1,22 +1,36 @@
 import { Form, useLoaderData, redirect, useNavigate, } from "react-router-dom";
 import { updateContact } from "../contacts";
 
+// Asynchronous function named 'action' that handles the form submission and contact update
 export async function action({ request, params }) {
+    // Extracting form data from the request
     const formData = await request.formData();
+
+    // Extracting individual form fields like first name, last name, etc.
     const firstName = formData.get("first");
     const lastName = formData.get("last");
+
+    // Converting form data into an object containing updates for the contact
     const updates = Object.fromEntries(formData);
     updates.first;
     updates.last;
+
+    // Asynchronously updating the contact using the 'updateContact' function
     await updateContact(params.contactId, updates);
+
+    // After updating the contact, redirect to the contact details page
     return redirect(`/contacts/${params.contactId}`);
   }
 
+  // React functional component named 'EditContact'
 export default function EditContact() {
+    // Extracting 'contact' from the data loaded by the route
   const { contact } = useLoaderData();
+
+   // Accessing the 'navigate' function from the 'react-router-dom' library
   const navigate = useNavigate();
 
-
+// JSX for the contact editing form
   return (
     <Form method="post" id="contact-form">
       <p>
